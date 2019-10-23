@@ -1,7 +1,3 @@
-<?php 
-	session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -46,6 +42,21 @@
 		.error {
 			color: red;
 		}
+
+		.post {
+			width: 100%;
+			border: 1px solid lightgrey;
+			margin-bottom: 30px;
+			padding: 18px;
+		}
+
+		.post * {
+			margin-bottom: 10px;
+		}
+
+		.post *:last-child {
+			margin-bottom: 0;
+		}
 	</style>
 </head>
 <body>
@@ -54,6 +65,7 @@
 		<nav>
 			<?php if(!isset($_SESSION['firstname'])) { ?>
 				<a href="login.php">Login</a>
+				|
 				<a href="register.php">Register</a>
 			<?php } ?>
 

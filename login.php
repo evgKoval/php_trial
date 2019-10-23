@@ -15,13 +15,13 @@ if(isset($_POST['login'])) {
 
     $user = $result->fetch(PDO::FETCH_ASSOC);
     
-    //var_dump($user['is_active']);
     if ($user) {
     	if ($user['is_active'] == '0') {
     		$error = 'User isn\'t active' ;
     	} else {
     		session_start();
 	        $_SESSION['firstname'] = $_POST['firstname'];
+	        $_SESSION['user_id'] = $user['user_id'];
 
 	        header("Location: /content.php");
     	}
@@ -35,12 +35,12 @@ if(isset($_POST['login'])) {
 		<input type="hidden" name="login">
 		<label>
 			First name
-			<input type="text" name="firstname">
+			<input type="text" name="firstname" value="<?php echo isset($_POST['firstname']) ? $_POST['firstname'] : ''; ?>">
 		</label>
 		<br><br>
 		<label>
 			Email
-			<input type="text" name="email">
+			<input type="text" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
 		</label>
 		<br><br>
 		<label>

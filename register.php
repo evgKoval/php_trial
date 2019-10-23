@@ -29,17 +29,17 @@ if(isset($_POST['register'])) {
 		<input type="hidden" name="register">
 		<label>
 			First name
-			<input type="text" name="firstname">
+			<input type="text" name="firstname" value="<?php echo isset($_POST['firstname']) ? $_POST['firstname'] : ''; ?>">
 		</label>
 		<br><br>
 		<label>
 			Last name
-			<input type="text" name="lastname">
+			<input type="text" name="lastname" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : ''; ?>">
 		</label>
 		<br><br>
 		<label>
 			Email
-			<input type="text" name="email">
+			<input type="text" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
 		</label>
 		<br><br>
 		<label>
