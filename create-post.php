@@ -13,7 +13,7 @@ if(isset($_POST['create'])) {
 
     $result->execute();
 
-    header("Location: /content.php");
+    header("Location: /content");
 }
 ?>
 

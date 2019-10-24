@@ -64,13 +64,13 @@
         <h3>Header</h3>
         <nav>
             <?php if(!isset($_SESSION['firstname'])) { ?>
-                <a href="login.php">Login</a>
+                <a href="login">Login</a>
                 |
-                <a href="register.php">Register</a>
+                <a href="register">Register</a>
             <?php } ?>
 
             <?php if(isset($_SESSION['firstname'])) { ?>
-                <a href="logout.php">Logout</a>
+                <a href="logout">Logout</a>
             <?php } ?>
         </nav>
     </header>

@@ -19,7 +19,7 @@ if(isset($_POST['register'])) {
 
         $result->execute();
 
-        header("Location: /login.php");
+        header("Location: /login");
     }
 }
 ?>

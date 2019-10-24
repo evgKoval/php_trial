@@ -23,7 +23,7 @@ if(isset($_POST['login'])) {
             $_SESSION['firstname'] = $_POST['firstname'];
             $_SESSION['user_id'] = $user['user_id'];
 
-            header("Location: /content.php");
+            header("Location: /content");
         }
         
     }

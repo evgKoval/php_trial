@@ -16,7 +16,7 @@
 <?php include('header.php'); ?>
     <h1>Hello, <?php echo isset($_SESSION['firstname']) ? $_SESSION['firstname'] : 'Guest' ?></h1> 
     <?php if(isset($_SESSION['firstname'])) { ?>
-        <a href="create-post.php">Create a post</a>
+        <a href="create-post">Create a post</a>
         <hr>
         <?php foreach($posts as $post) { ?>
             <article class="post">
@@ -24,6 +24,8 @@
                 <div class="text"><?php echo $post['post_text']; ?></div>
                 <div class="created"><?php echo $post['created_at']; ?></div>
                 <a href="edit/<?php echo $post['id']; ?>">Edit post</a>
+                |
+                <a href="delete/<?php echo $post['id']; ?>">Delete post</a>
             </article>
         <?php } ?>
     <?php } ?>
