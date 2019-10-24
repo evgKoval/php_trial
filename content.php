@@ -35,12 +35,12 @@
                     <button type="button" class="btn btn-primary btnEditModal" id="<?php echo $post['id']; ?>">
                         Edit
                     </button>
-                    <a href="delete/<?php echo $post['id']; ?>" class="btn btn-danger">Delete</a>
+                    <button type="button" id="<?php echo $post['id']; ?>" class="btn btn-danger btnDelete">Delete</button>
                 </div>
             </div>
         <?php } ?>
 
-        <!-- Modal -->
         <?php include('modal.php'); ?>
+
     <?php } ?>
 <?php include('footer.php'); ?>
