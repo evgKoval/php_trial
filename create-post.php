@@ -13,24 +13,17 @@ if(isset($_POST['create'])) {
 
     $result->execute();
 
-    header("Location: /content");
+    $lastId = $db->lastInsertId();
+
+    $sql = 'SELECT * FROM posts WHERE id = :id';
+
+    $result = $db->prepare($sql);
+    $result->bindParam(':id', $lastId, PDO::PARAM_STR);
+
+    $result->execute();
+
+    $post = $result->fetch(PDO::FETCH_ASSOC);
+    
+    echo json_encode($post);
 }
 ?>
-
-<?php include('header.php'); ?>
-    <h1>Create a post</h1>
-    <form method="POST">
-        <input type="hidden" name="create">
-        <label>
-            Title
-            <input type="text" name="title">
-        </label>
-        <br><br>
-        <label>
-            Full text
-            <textarea type="text" name="post_text" rows="6" cols="50"></textarea>
-        </label>
-        <br><br>
-        <button type="submit">Create</button>
-    </form>
-<?php include('footer.php'); ?>

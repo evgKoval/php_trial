@@ -31,24 +31,26 @@ if(isset($_POST['login'])) {
 ?>
 
 <?php include('header.php'); ?>
+    <h1 class="mb-4">Login</h1>
     <form method="POST">
         <input type="hidden" name="login">
-        <label>
-            First name
-            <input type="text" name="firstname" value="<?php echo isset($_POST['firstname']) ? $_POST['firstname'] : ''; ?>">
-        </label>
-        <br><br>
-        <label>
-            Email
-            <input type="text" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
-        </label>
-        <br><br>
-        <label>
-            Password
-            <input type="password" name="password">
-        </label>
-        <br><br>
-        <button type="submit">Login</button>
+        <div class="form-group">
+            <label for="firstname_input">First name</label>
+            <input name="firstname" type="text" class="form-control" id="firstname_input" placeholder="Enter your first name..." value="<?php echo isset($_POST['firstname']) ? $_POST['firstname'] : ''; ?>">
+        </div>
+        <div class="form-group">
+            <label for="email_input">Email</label>
+            <input name="email" type="text" class="form-control" id="email_input" placeholder="example@gmail.com" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+        </div>
+        <div class="form-group">
+            <label for="password_input">Password</label>
+            <input name="password" type="password" class="form-control" id="password_input" placeholder="Enter your password...">
+        </div>
+        <button type="submit" class="btn btn-primary mb-4 btn-block">Login</button>
     </form>
-    <p class="error"><?php if($error) echo $error ?></p>
+    <?php if($error) { ?>
+        <div class="alert alert-danger" role="alert">
+        <?php echo $error; ?>
+        </div>
+    <?php } ?>
 <?php include('footer.php'); ?>

@@ -25,34 +25,34 @@ if(isset($_POST['register'])) {
 ?>
 
 <?php include('header.php'); ?>
+    <h1 class="mb-4">Register</h1>
     <form method="POST">
         <input type="hidden" name="register">
-        <label>
-            First name
-            <input type="text" name="firstname" value="<?php echo isset($_POST['firstname']) ? $_POST['firstname'] : ''; ?>">
-        </label>
-        <br><br>
-        <label>
-            Last name
-            <input type="text" name="lastname" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : ''; ?>">
-        </label>
-        <br><br>
-        <label>
-            Email
-            <input type="text" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
-        </label>
-        <br><br>
-        <label>
-            Password
-            <input type="password" name="password">
-        </label>
-        <br><br>
-        <label>
-            Confirm password
-            <input type="password" name="confirm_password">
-        </label>
-        <br><br>
-        <button type="submit">Register</button>
+        <div class="form-group">
+            <label for="firstname_input">First name</label>
+            <input name="firstname" type="text" class="form-control" id="firstname_input" placeholder="Enter your first name..." value="<?php echo isset($_POST['firstname']) ? $_POST['firstname'] : ''; ?>">
+        </div>
+        <div class="form-group">
+            <label for="lastname_input">Last name</label>
+            <input name="lastname" type="text" class="form-control" id="lastname_input" placeholder="Enter your last name..." value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : ''; ?>">
+        </div>
+        <div class="form-group">
+            <label for="email_input">Email</label>
+            <input name="email" type="text" class="form-control" id="email_input" placeholder="example@gmail.com" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+        </div>
+        <div class="form-group">
+            <label for="password_input">Password</label>
+            <input name="password" type="password" class="form-control" id="password_input" placeholder="Enter your password...">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password_input">Confirm password</label>
+            <input name="confirm_password" type="password" class="form-control" id="confirm_password_input" placeholder="Confirm your password...">
+        </div>
+        <button type="submit" class="btn btn-primary mb-4 btn-block">Register</button>
     </form>
-    <p class="error"><?php if($error) echo $error ?></p>
+    <?php if($error) { ?>
+        <div class="alert alert-danger" role="alert">
+        <?php echo $error; ?>
+        </div>
+    <?php } ?>
 <?php include('footer.php'); ?>

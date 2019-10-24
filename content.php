@@ -14,19 +14,33 @@
 ?>
 
 <?php include('header.php'); ?>
-    <h1>Hello, <?php echo isset($_SESSION['firstname']) ? $_SESSION['firstname'] : 'Guest' ?></h1> 
+    <h1>Hello, <?php echo isset($_SESSION['firstname']) ? $_SESSION['firstname'] : 'Guest' ?></h1>
     <?php if(isset($_SESSION['firstname'])) { ?>
-        <a href="create-post">Create a post</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+            Create a post
+        </button>
         <hr>
         <?php foreach($posts as $post) { ?>
-            <article class="post">
-                <h2 class="title"><?php echo $post['title']; ?></h2>
-                <div class="text"><?php echo $post['post_text']; ?></div>
-                <div class="created"><?php echo $post['created_at']; ?></div>
-                <a href="edit/<?php echo $post['id']; ?>">Edit post</a>
-                |
-                <a href="delete/<?php echo $post['id']; ?>">Delete post</a>
-            </article>
+            <div class="card mb-4">
+                <div class="card-body" id="<?php echo $post['id']; ?>">
+                    <h5 class="card-title"><?php echo $post['title']; ?></h5>
+                    <p class="card-text">
+                        <?php echo $post['post_text']; ?>
+                    </p>
+                    <p>
+                        <small>
+                            <?php echo $post['created_at']; ?>
+                        </small>
+                    </p>
+                    <button type="button" class="btn btn-primary btnEditModal" id="<?php echo $post['id']; ?>">
+                        Edit
+                    </button>
+                    <a href="delete/<?php echo $post['id']; ?>" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
         <?php } ?>
+
+        <!-- Modal -->
+        <?php include('modal.php'); ?>
     <?php } ?>
 <?php include('footer.php'); ?>
