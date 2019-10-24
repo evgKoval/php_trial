@@ -1,6 +1,6 @@
-	</div>
-	<footer>
-		footer - 2019
-	</footer>
+    </div>
+    <footer>
+        footer - 2019
+    </footer>
 </body>
 </html>

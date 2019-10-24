@@ -1,11 +1,13 @@
 <?php 
 session_start();
-$routes = ['login.php', 'register.php', 'content.php', 'logout.php', '404.php', 'create-post.php'];
+$routes = ['login', 'register', 'content', 'logout', '404', 'create-post', 'edit', 'save-post'];
+
 $uri = substr($_SERVER['REQUEST_URI'], 1);
+$internalRoute = preg_replace("~$uriPattern~", $path, $uri);
+$segments = explode('/', $internalRoute);
 
 foreach ($routes as $route) {
-	if ($uri === $route) {
-		require $route;
-	}
+    if ($segments[0] === $route) {
+        require $route . '.php';
+    }
 }
-
