@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$routes = ['login', 'register', 'content', 'logout', '404', 'create-post', 'edit', 'save-post', 'delete', 'confirm', 'admin', 'load-data'];
+$routes = ['login', 'register', 'content', 'logout', '404', 'create-post', 'edit', 'save-post', 'delete', 'confirm', 'admin', 'load-data', 'post'];
 
 $uri = substr($_SERVER['REQUEST_URI'], 1);
 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);

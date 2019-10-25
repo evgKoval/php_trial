@@ -23,7 +23,9 @@
         <?php foreach($posts as $post) { ?>
             <div class="card mb-4">
                 <div class="card-body" id="<?php if($post['id']) echo $post['id']; ?>">
-                    <h5 class="card-title"><?php if($post['title']) echo $post['title']; ?></h5>
+                    <h5 class="card-title">
+                        <a href="post/<?php if($post['id']) echo $post['id']; ?>"><?php if($post['title']) echo $post['title']; ?></a>
+                    </h5>
                     <p class="card-text">
                         <?php if($post['post_text']) echo $post['post_text']; ?>
                     </p>

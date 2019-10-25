@@ -22,7 +22,7 @@
 ?>
 
 <?php include('header.php'); ?>
-    <table id="data" class="display">
+    <table id="data" class="display table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>First name</th>
