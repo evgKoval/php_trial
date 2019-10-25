@@ -31,19 +31,26 @@ if(isset($_POST['register'])) {
     }
 
     if ($errors == false) {
+        $hash = hash('ripemd160', $_POST['firstname'] . $_POST['email']);
+
         $db = $db->getConnection();
 
-        $sql = 'INSERT INTO users (firstname, lastname, email, password) ' . 'VALUES (:firstname, :lastname, :email, :password)';
+        $sql = 'INSERT INTO users (firstname, lastname, email, password, hash) ' . 'VALUES (:firstname, :lastname, :email, :password, :hash)';
 
         $result = $db->prepare($sql);
         $result->bindParam(':firstname', $_POST['firstname'], PDO::PARAM_STR);
         $result->bindParam(':lastname', $_POST['lastname'], PDO::PARAM_STR);
         $result->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
         $result->bindParam(':password', $_POST['password'], PDO::PARAM_STR);
+        $result->bindParam(':hash', $hash, PDO::PARAM_STR);
 
         $result->execute();
 
-        header("Location: /login");
+        if (isset($_SESSION['flash'])) {
+            unset($_SESSION["flash"]);
+        }
+
+        require 'send-mail.php';
     }
 }
 ?>

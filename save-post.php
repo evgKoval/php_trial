@@ -11,5 +11,3 @@ $result->bindParam(':post_text', $_POST['post_text'], PDO::PARAM_STR);
 $result->bindParam(':id', $_POST['id'], PDO::PARAM_STR);
 
 $result->execute();
-
-echo 'dddd';

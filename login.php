@@ -5,6 +5,7 @@ require 'validation.php';
 $errors = false;
 
 if(isset($_POST['login'])) {
+    unset($_SESSION["flash"]);
 
     if (!Validation::checkName($_POST['firstname'])) {
         $errors[] = 'First name doesn\'t be less 2 symbols' ;
@@ -33,7 +34,7 @@ if(isset($_POST['login'])) {
         
         if ($user) {
             if ($user['is_active'] == '0') {
-                $error = 'User isn\'t active' ;
+                $errors[] = 'Please check your email and verificite' ;
             } else {
                 session_start();
                 $_SESSION['firstname'] = $_POST['firstname'];
@@ -50,6 +51,11 @@ if(isset($_POST['login'])) {
 
 <?php include('header.php'); ?>
     <h1 class="mb-4">Login</h1>
+    <?php if (isset($_SESSION['flash'])) { ?>
+        <div class="alert alert-success" role="alert">
+            Your verification is done!
+        </div>
+    <?php } ?>
     <form method="POST">
         <input type="hidden" name="login">
         <div class="form-group">
