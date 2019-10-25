@@ -36,11 +36,14 @@ if(isset($_POST['login'])) {
             if ($user['is_active'] == '0') {
                 $errors[] = 'Please check your email and verificite' ;
             } else {
-                session_start();
                 $_SESSION['firstname'] = $_POST['firstname'];
                 $_SESSION['user_id'] = $user['user_id'];
 
-                header("Location: /content");
+                if ($user['is_admin']) {
+                    header("Location: /admin");
+                } else {
+                    header("Location: /content");
+                }
             }
         } else {
             $errors[] = 'First name, email or password is wrong';

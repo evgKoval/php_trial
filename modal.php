@@ -1,7 +1,7 @@
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+            <input type="hidden" name="user_id" value="<?php if($_SESSION['user_id']) echo $_SESSION['user_id']; ?>">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">Create/Edit post</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

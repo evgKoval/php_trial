@@ -22,20 +22,20 @@
         <hr>
         <?php foreach($posts as $post) { ?>
             <div class="card mb-4">
-                <div class="card-body" id="<?php echo $post['id']; ?>">
-                    <h5 class="card-title"><?php echo $post['title']; ?></h5>
+                <div class="card-body" id="<?php if($post['id']) echo $post['id']; ?>">
+                    <h5 class="card-title"><?php if($post['title']) echo $post['title']; ?></h5>
                     <p class="card-text">
-                        <?php echo $post['post_text']; ?>
+                        <?php if($post['post_text']) echo $post['post_text']; ?>
                     </p>
                     <p>
                         <small>
-                            <?php echo $post['created_at']; ?>
+                            <?php if($post['created_at']) echo $post['created_at']; ?>
                         </small>
                     </p>
                     <button type="button" class="btn btn-primary btnEditModal" id="<?php echo $post['id']; ?>">
                         Edit
                     </button>
-                    <button type="button" id="<?php echo $post['id']; ?>" class="btn btn-danger btnDelete">Delete</button>
+                    <button type="button" id="<?php if($post['id']) echo $post['id']; ?>" class="btn btn-danger btnDelete">Delete</button>
                 </div>
             </div>
         <?php } ?>
