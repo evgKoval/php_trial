@@ -1,31 +1,49 @@
 <?php 
 require 'db/db.php';
-$error = '';
+require 'validation.php';
+
+$errors = false;
 
 if(isset($_POST['login'])) {
-    $db = $db->getConnection();
 
-    $sql = 'SELECT * FROM users WHERE firstname = :firstname AND email = :email AND password = :password';
+    if (!Validation::checkName($_POST['firstname'])) {
+        $errors[] = 'First name doesn\'t be less 2 symbols' ;
+    }
 
-    $result = $db->prepare($sql);
-    $result->bindParam(':firstname', $_POST['firstname'], PDO::PARAM_STR);
-    $result->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-    $result->bindParam(':password', $_POST['password'], PDO::PARAM_STR);
-    $result->execute();
+    if (!Validation::checkEmail($_POST['email'])) {
+        $errors[] = 'Email is wrong';
+    }
 
-    $user = $result->fetch(PDO::FETCH_ASSOC);
-    
-    if ($user) {
-        if ($user['is_active'] == '0') {
-            $error = 'User isn\'t active' ;
-        } else {
-            session_start();
-            $_SESSION['firstname'] = $_POST['firstname'];
-            $_SESSION['user_id'] = $user['user_id'];
+    if (!Validation::checkPassword($_POST['password'])) {
+        $errors[] = 'Password doesn\'t be less 3 symbols' ;
+    }
 
-            header("Location: /content");
-        }
+    if ($errors == false) {
+        $db = $db->getConnection();
+
+        $sql = 'SELECT * FROM users WHERE firstname = :firstname AND email = :email AND password = :password';
+
+        $result = $db->prepare($sql);
+        $result->bindParam(':firstname', $_POST['firstname'], PDO::PARAM_STR);
+        $result->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
+        $result->bindParam(':password', $_POST['password'], PDO::PARAM_STR);
+        $result->execute();
+
+        $user = $result->fetch(PDO::FETCH_ASSOC);
         
+        if ($user) {
+            if ($user['is_active'] == '0') {
+                $error = 'User isn\'t active' ;
+            } else {
+                session_start();
+                $_SESSION['firstname'] = $_POST['firstname'];
+                $_SESSION['user_id'] = $user['user_id'];
+
+                header("Location: /content");
+            }
+        } else {
+            $errors[] = 'First name, email or password is wrong';
+        }
     }
 }
 ?>
@@ -48,9 +66,11 @@ if(isset($_POST['login'])) {
         </div>
         <button type="submit" class="btn btn-primary mb-4 btn-block">Login</button>
     </form>
-    <?php if($error) { ?>
+    <?php if (isset($errors) && is_array($errors)) { ?>
         <div class="alert alert-danger" role="alert">
-        <?php echo $error; ?>
+            <?php foreach ($errors as $error) { ?>
+                <li><?php echo $error; ?></li>
+            <?php } ?>
         </div>
     <?php } ?>
 <?php include('footer.php'); ?>

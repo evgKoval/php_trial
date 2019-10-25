@@ -1,12 +1,36 @@
 <?php
 require 'db/db.php';
+require 'validation.php';
 
-$error = '';
+$errors = false;
 
 if(isset($_POST['register'])) {
-    if ($_POST['password'] !== $_POST['confirm_password']) {
-        $error = 'The passwords must be equal';
-    } else {
+
+    if (!Validation::checkName($_POST['firstname'])) {
+        $errors[] = 'First name doesn\'t be less 2 symbols' ;
+    }
+
+    if (!Validation::checkName($_POST['lastname'])) {
+        $errors[] = 'Last name doesn\'t be less 2 symbols' ;
+    }
+
+    if (!Validation::checkEmail($_POST['email'])) {
+        $errors[] = 'Email is wrong' ;
+    }
+
+    if (!Validation::checkPassword($_POST['password'])) {
+        $errors[] = 'Password doesn\'t be less 3 symbols' ;
+    }
+
+    if (!Validation::confirmPassword($_POST['password'], $_POST['confirm_password'])) {
+        $errors[] = 'Passwords must be equal and not empty' ;
+    }
+
+    if (Validation::checkEmailExists($db, $_POST['email'])) {
+        $errors[] = 'This email is already used';
+    }
+
+    if ($errors == false) {
         $db = $db->getConnection();
 
         $sql = 'INSERT INTO users (firstname, lastname, email, password) ' . 'VALUES (:firstname, :lastname, :email, :password)';
@@ -50,9 +74,11 @@ if(isset($_POST['register'])) {
         </div>
         <button type="submit" class="btn btn-primary mb-4 btn-block">Register</button>
     </form>
-    <?php if($error) { ?>
+    <?php if (isset($errors) && is_array($errors)) { ?>
         <div class="alert alert-danger" role="alert">
-        <?php echo $error; ?>
+            <?php foreach ($errors as $error) { ?>
+                <li><?php echo $error; ?></li>
+            <?php } ?>
         </div>
     <?php } ?>
 <?php include('footer.php'); ?>
